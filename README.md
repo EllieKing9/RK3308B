@@ -1,6 +1,6 @@
 # ROC-RK3308B-CC-PLUS
 development board
-<h6>
+  
 * 펌웨어 업데이트
 
 https://wiki.t-firefly.com/en/Core-3308Y/burning_firmware.html (Burning Firmware manual)
@@ -8,6 +8,7 @@ https://wiki.t-firefly.com/en/Core-3308Y/burning_firmware.html (Burning Firmware
 https://en.t-firefly.com/doc/download/84.html#other_296 (Driver Assistant & Android Tool download)
 
 https://en.t-firefly.com/doc/download/page/id/67.html#other_294
+
 ```
 윈도우즈(Windows)에서 준비
 1. 드라이버 어시스턴트(Driver Assistant) 다운로드 및 설치(DriverInstall.exe)
@@ -22,8 +23,8 @@ https://en.t-firefly.com/doc/download/page/id/67.html#other_294
 5. AndroidTool.exe _ [Firmware] 탭(Tab) 클릭 _ 펌웨어 선택
   _ [Upgrade] 클릭
 ```
+  
 * 시리얼 디버깅 (Serial Debugging)
-
 
 ```
 
