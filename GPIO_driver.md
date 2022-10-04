@@ -95,6 +95,7 @@ Device Tree
 부트로더 > DTS를 메모리에 로드 및 포인터를 커널에 전달 > CPU, Memory, Bus 및 주변 장치(Peripheral)를 관리
 	프로빙으로 감지 할 수 없는 경우 PCI 호스트 브리지 장치를 설명한다. 그 외에는 PCI 장치를 설명하는 노드가 필요하지 않다.
 노드의 이름은 일반적으로 정의된 리스트가 있다.
+디바이스 정보를 여기서 찾음
 
 Representation of the Device Tree contents : /sys/firmware/devicetree/base
 If dtc is available on the target, possible to ”unpack” the Device Tree : $dtc -I fs /sys/firmware/devicetree/base
@@ -106,11 +107,22 @@ If dtc is available on the target, possible to ”unpack” the Device Tree : $d
 "/" 는 전체 장치의 최상위 루트 노드라는 의미
 
 / {
-	compatible = "제조사,모델"; //식별자
+	compatible = "제조사,모델"; 
+	compatible ="fsl,mpc8349-uart", "nsl16550" //첫번째 문자열 이외에는 형식이 자유롭다
+	//"fsl,mpc8349-uart" 문자열을 인식할 수 있는 디바이스 드라이버를 찾을 것이고
+	//만약 발견에 실패한다면 "ns16550"의 문자열을 인식할 수 있는 디바이스 드라이버를 찾는다.
+
+	#address-cells = <2>; //32bit: 1, 64bit: 2인 경우도 있으며 2개의 주소를 사용(i2c)하는 경우도 있다.
+	#size-cells = <1>;
 	node {
 		compatible = "식별자"; 
 		child-node {
-		
+		reg = <0xD0000000 0x0000 1024 0xE0000000 0x0000 2048>;
+		//#address-cells가 2이고 #size-cells가 1인 경우 
+		//=> 0xD0000000 0x0000  : 시작 주소 2개, 1024  : 주소 범위 크기 | 0xE0000000 0x0000 : 시작 주소 2개 , 2048 : 주소 범위 크기
+		//reg = <0x0C00 0x0 0xFFFF02 0x3333> 
+		//#address-cells가 1이고 #size-cells도 1인 경우 
+		//=> 0x0C00  : 시작 주소 , 0x0  : 주소 범위 크기 | 0xFFFF02 : 시작 주소 , 0x3333 : 주소 범위 크기 
 		};
 	};
 };
@@ -118,10 +130,22 @@ If dtc is available on the target, possible to ”unpack” the Device Tree : $d
 - 속성 표현
 	key = value // 값은 "문자열", <32bit 부호없는 정수형>, [2진 데이터]
 - 노드 표현
-	이름@장치주소
-	@장치주소는 동일한 디바이스를 나타내거나 동일한 내용을 나타내는 노드가 없다면 생략
-	:31개의 문자 길이를 갖는 아스키 문자열
+	이름(31개의 문자 길이를 갖는 아스키 문자열)@장치주소(동일한 디바이스를 나타내거나 동일한 내용을 나타내는 노드가 없다면 생략)
+- reg = <주소1 길이1 [주소2 길이2] [주소3 길이3] ... >
+	"#address-cells" 속성과 "#size-cells" 은 부모 노드에서 지정하고  reg 속성 은 자식 노드에 지정
 
+* 인터럽트 표현
+	디바이스 노드간에 링크 구조로 표현(디바이스 노드의 속성의 형태)
+	- interrupt-parent 속성 : 디폴트 인터럽트 컨트롤러를 지정, 트리 계층의 가장 상위에 정의하며 상속됨
+	- interrupt-controller; 속성 : 해당 노드의 디바이스가 인터럽트 신호를 수신하는 인터럽트 컨트롤러 디바이스라는 것을 표현
+	- #interrupt-cells 속성 : interrupt-controller 속성 선언시 같이 선언
+	- interrupts : 디바이스가 발생하는 인터럽트 출력 신호에 대한 정보의 리스트를 값으로 표현
+
+
+aliases {
+	/external-bus/ethernet@0,0 = &eth0;
+	..
+}
 ```
 
 
