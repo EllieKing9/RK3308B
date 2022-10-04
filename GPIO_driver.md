@@ -88,3 +88,40 @@ kernel/arch/arm64/boot/dts/rockchip/rk3308b-roc-cc-plus-amic_emmc.dts
 
 
 ```
+
+Device Tree
+```
+시스템의 장치를 설명하는  노드가 있는 트리 구조의 데이터
+부트로더 > DTS를 메모리에 로드 및 포인터를 커널에 전달 > CPU, Memory, Bus 및 주변 장치(Peripheral)를 관리
+	프로빙으로 감지 할 수 없는 경우 PCI 호스트 브리지 장치를 설명한다. 그 외에는 PCI 장치를 설명하는 노드가 필요하지 않다.
+노드의 이름은 일반적으로 정의된 리스트가 있다.
+
+Representation of the Device Tree contents : /sys/firmware/devicetree/base
+If dtc is available on the target, possible to ”unpack” the Device Tree : $dtc -I fs /sys/firmware/devicetree/base
+
+.dtsi(SoC level) files are included files, while .dts(Board level) files are final Device Trees
+```
+*.dts 내용
+```
+"/" 는 전체 장치의 최상위 루트 노드라는 의미
+
+/ {
+	compatible = "제조사,모델"; //식별자
+	node {
+		compatible = "식별자"; 
+		child-node {
+		
+		};
+	};
+};
+
+- 속성 표현
+	key = value // 값은 "문자열", <32bit 부호없는 정수형>, [2진 데이터]
+- 노드 표현
+	이름@장치주소
+	@장치주소는 동일한 디바이스를 나타내거나 동일한 내용을 나타내는 노드가 없다면 생략
+	:31개의 문자 길이를 갖는 아스키 문자열
+
+```
+
+
