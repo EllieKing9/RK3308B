@@ -61,6 +61,8 @@ GPIO4_A6 : 4 * 32 + ((0 * 8) + 6 = 134
 $echo 134 > /sys/class/gpio/export
 $echo out > /sys/class/gpio/gpio70/direction
 $echo 1 > /sys/class/gpio/gpio70/value
+
+$cat /sys/kernel/gpio
 ```
 
 Kernel Driver
