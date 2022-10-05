@@ -53,3 +53,19 @@ https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html (PuTTY download)
   > 터미널 창에 아무것도 안뜨면..
     Baud rate 재확인 및 쪽보드랑 개발보드 연결 라인 변경(TXD, RXD 바꾸어서)
 ```
+
+ADB
+```
+$sudo apt-get install android-tools-adb
+$cd /etc/udev/rules.d
+$sudo nano 51-android.rules
+SUBSYSTEM=="usb", ATTR{idVendor}=="2207", MODE="0666", GROUP="plugdev"
+
+$sudo udevadm control --reload-rules
+$sudo nano ~/.android/adb_usb.ini
+# ANDROID 3RD PARTY USB VENDOR ID LIST -- DO NOT EDIT.
+# USE 'android update adb' TO GENERATE.
+# 1 USB VENDOR ID PER LINE.
+0x2207
+
+```
