@@ -130,17 +130,17 @@ node_label: node_name@unit_address {
 	//"fsl,mpc8349-uart" 문자열을 인식할 수 있는 디바이스 드라이버를 찾을 것이고
 	//만약 발견에 실패한다면 "ns16550"의 문자열을 인식할 수 있는 디바이스 드라이버를 찾는다.
 
-	#address-cells = <2>; //32bit: 1, 64bit: 2인 경우도 있으며 2개의 주소를 사용(i2c)하는 경우도 있다.
+	#address-cells = <2>; //32bit: <1>, 64bit: <2>인 경우도 있으며 2개의 주소를 사용(i2c)하는 경우도 있다.
 	#size-cells = <1>;
 	node {
 		compatible = "식별자"; 
 		child-node {
-		reg = <0xD0000000 0x0000 1024 0xE0000000 0x0000 2048>;
-		//#address-cells가 2이고 #size-cells가 1인 경우 
-		//=> 0xD0000000 0x0000  : 시작 주소 2개, 1024  : 주소 범위 크기 | 0xE0000000 0x0000 : 시작 주소 2개 , 2048 : 주소 범위 크기
-		//reg = <0x0C00 0x0 0xFFFF02 0x3333> 
-		//#address-cells가 1이고 #size-cells도 1인 경우 
-		//=> 0x0C00  : 시작 주소 , 0x0  : 주소 범위 크기 | 0xFFFF02 : 시작 주소 , 0x3333 : 주소 범위 크기 
+			reg = <0xD0000000 0x0000 1024 0xE0000000 0x0000 2048>;
+			//#address-cells가 2이고 #size-cells가 1인 경우 
+			//=> 0xD0000000 0x0000  : 시작 주소 2개, 1024  : 주소 범위 크기 | 0xE0000000 0x0000 : 시작 주소 2개 , 2048 : 주소 범위 크기
+			//reg = <0x0C00 0x0 0xFFFF02 0x3333> 
+			//#address-cells가 1이고 #size-cells도 1인 경우 
+			//=> 0x0C00  : 시작 주소 , 0x0  : 주소 범위 크기 | 0xFFFF02 : 시작 주소 , 0x3333 : 주소 범위 크기 
 		};
 	};
 };
@@ -164,13 +164,21 @@ aliases {
 	/external-bus/ethernet@0,0 = &eth0;
 	..
 }
+
+All Device Tree bindings recognized by the kernel are documented in Documentation/devicetree/bindings
+PWM
+/mnt/blank/rk-3308-linux-oneunit-dispenser/kernel/Documentation/devicetree/bindings/pwm/pwm-gpio.txt 확인
+
+$cd /proc/device-tree
+$ls
+
+
 ```
 
 pinctrl
 
 https://docs.zephyrproject.org/3.1.0/hardware/pinctrl/index.html
 ```
-
 
 ```
 
