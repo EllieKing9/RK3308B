@@ -159,6 +159,23 @@ node_label: node_name@unit_address {
 	- #interrupt-cells 속성 : interrupt-controller 속성 선언시 같이 선언
 	- interrupts : 디바이스가 발생하는 인터럽트 출력 신호에 대한 정보의 리스트를 값으로 표현
 
+#define GIC_SPI 0
+#define GIC_PPI 1
+
+enum {
+	IRQ_TYPE_NONE		= 0x00000000,
+	IRQ_TYPE_EDGE_RISING	= 0x00000001,
+	IRQ_TYPE_EDGE_FALLING	= 0x00000002,
+	IRQ_TYPE_EDGE_BOTH	= (IRQ_TYPE_EDGE_FALLING | IRQ_TYPE_EDGE_RISING),
+	IRQ_TYPE_LEVEL_HIGH	= 0x00000004,
+	IRQ_TYPE_LEVEL_LOW	= 0x00000008,
+	IRQ_TYPE_LEVEL_MASK	= (IRQ_TYPE_LEVEL_LOW | IRQ_TYPE_LEVEL_HIGH),
+	IRQ_TYPE_SENSE_MASK	= 0x0000000f,
+	IRQ_TYPE_DEFAULT	= IRQ_TYPE_SENSE_MASK,
+
+	IRQ_TYPE_PROBE		= 0x00000010,
+	..
+}
 
 aliases {
 	/external-bus/ethernet@0,0 = &eth0;
