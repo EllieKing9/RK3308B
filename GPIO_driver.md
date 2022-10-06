@@ -104,9 +104,25 @@ If dtc is available on the target, possible to ”unpack” the Device Tree : $d
 
 .dtsi(SoC level) files are included files, while .dts(Board level) files are final Device Trees
 ```
+
 *.dts 내용
+
+http://shukra.cedt.iisc.ernet.in/edwiki/Device_Tree_and_Boot_Flow
 ```
 "/" 는 전체 장치의 최상위 루트 노드라는 의미
+
+node_label: node_name@unit_address {
+	a-string-property = "A string";
+	a-string-list-property = "first string", "second string";
+	a-byte-data-property = [0x01 0x23 0x34 0x56];
+	
+	a-reference-to-something = <&node_label>
+	a-cell-property = < 1 2 3 4>;
+	
+	child-node_name@unit_address {
+		an-empty-property;
+	}
+}
 
 / {
 	compatible = "제조사,모델"; 
