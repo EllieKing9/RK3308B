@@ -166,4 +166,12 @@ aliases {
 }
 ```
 
+pinctrl
+
+https://docs.zephyrproject.org/3.1.0/hardware/pinctrl/index.html
+```
+
+
+```
+
 
