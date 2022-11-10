@@ -7,7 +7,7 @@ https://wiki.t-firefly.com/en/Core-3308Y/burning_firmware.html (Burning Firmware
 
 https://en.t-firefly.com/doc/download/84.html#other_296 (Driver Assistant & Android Tool download)
 
-https://en.t-firefly.com/doc/download/page/id/67.html#other_294
+https://en.t-firefly.com/doc/download/page/id/67.html#other_294 (Android Tool)
 
 ```
 윈도우즈(Windows)에서 준비
@@ -55,7 +55,10 @@ https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html (PuTTY download)
 ```
 
 ADB
+
+윈도우 버전 다운로드 (https://wiki.t-firefly.com/en/ROC-RK3568-PC/adb_use.html)
 ```
+//work on WSL
 $sudo apt-get install android-tools-adb
 $cd /etc/udev/rules.d
 $sudo nano 51-android.rules
@@ -68,4 +71,8 @@ $sudo nano ~/.android/adb_usb.ini
 # 1 USB VENDOR ID PER LINE.
 0x2207
 
+//Windows
+//adb 설치
+adb 다운로드 > c:\adb 에 압축해제
+cmd > cd c:\adb\ > adb devices > device list 확인 > adb push 파일경로(c:\adb\push\filename) 복사위치(/mnt/filename)
 ```
